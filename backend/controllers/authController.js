@@ -13,11 +13,24 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../config/database');
+const { UserModel } = require('../models/userModel');
 
 // POST /auth/registro - cria um novo usuário
 const registro = async (req, res) => {
-  // TODO
-  res.json({ mensagem: 'registro - não implementado' });
+
+  const { nome, email, senha, nivel_acesso } = req.body
+
+  try {
+    const emailExiste = await UserModel.encontrarPorEmail(email);
+    if(!emailExiste){
+      res.status(400).json({ mensagem: 'Email já existe' });
+    }
+
+    const criarUsuario = await UserModel.criarUsuario(nome, email, senha, nivel_acesso)
+
+  } catch (error) {
+    
+  }
 };
 
 // POST /auth/login - autentica e retorna JWT
