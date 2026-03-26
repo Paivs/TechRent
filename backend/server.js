@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
 });
 
 // ---- Inicialização do servidor ----
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
